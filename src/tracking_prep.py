@@ -28,13 +28,13 @@ def load_tracking_directory(directory: str | Path, pattern: str = "*Tracking_*.c
 	return load_tracking_files(tracking_paths)
 
 
-def split_tracking_by_period(tracking_frame: pd.DataFrame) -> dict[int, pd.DataFrame]:
+def split_tracking_by_period(tracking_frame: pd.DataFrame) -> dict[object, pd.DataFrame]:
 	if "period" not in tracking_frame.columns:
 		raise ValueError("tracking_frame must contain a 'period' column")
 
-	period_splits: dict[int, pd.DataFrame] = {}
+	period_splits: dict[object, pd.DataFrame] = {}
 	for period_value, period_frame in tracking_frame.groupby("period", sort=True):
-		period_splits[int(period_value)] = period_frame.copy()
+		period_splits[period_value] = period_frame.copy()
 	return period_splits
 
 

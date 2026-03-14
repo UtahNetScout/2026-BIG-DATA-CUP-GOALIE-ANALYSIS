@@ -20,6 +20,39 @@ class BuildTrackingFrameSequenceTests(unittest.TestCase):
 		self.assertLess(sequence.iloc[0], sequence.iloc[1])
 		self.assertLess(sequence.iloc[1], sequence.iloc[2])
 
+	def test_build_tracking_frame_sequence_ot_period_follows_regulation(self) -> None:
+		"""'OT' period label should produce frame sequence values greater than period 3."""
+		frame = pd.DataFrame(
+			[
+				{"image_id": "game_000001", "period": "OT", "game_clock": "4:59"},
+				{"image_id": "game_000002", "period": 3, "game_clock": "0:01"},
+			]
+		)
+
+		sequence = build_tracking_frame_sequence(frame)
+
+		# OT (mapped to period 4) must sort after regulation period 3
+		ot_seq = sequence.iloc[0]
+		p3_seq = sequence.iloc[1]
+		self.assertGreater(ot_seq, p3_seq)
+
+	def test_build_tracking_frame_sequence_ot_is_monotonic_within_period(self) -> None:
+		"""Multiple OT frames should be ordered by clock and image suffix, not crash."""
+		frame = pd.DataFrame(
+			[
+				{"image_id": "game_000001", "period": "OT", "game_clock": "5:00"},
+				{"image_id": "game_000002", "period": "OT", "game_clock": "4:30"},
+				{"image_id": "game_000003", "period": "OT", "game_clock": "4:30"},
+			]
+		)
+
+		sequence = build_tracking_frame_sequence(frame)
+
+		# First frame has more time remaining → lower elapsed → lower sequence value
+		self.assertLess(sequence.iloc[0], sequence.iloc[1])
+		# Same clock, higher suffix → higher sequence value
+		self.assertLess(sequence.iloc[1], sequence.iloc[2])
+
 
 class ComputeMotionEfficiencyTests(unittest.TestCase):
 	def test_compute_motion_efficiency_returns_one_for_straight_line_path(self) -> None:

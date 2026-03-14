@@ -4,7 +4,7 @@ from typing import Final
 
 import pandas as pd
 
-from .metrics import compute_motion_efficiency
+from .metrics import _period_to_float, compute_motion_efficiency
 
 
 EVENT_ALIGNMENT_NOTE: Final[str] = (
@@ -81,12 +81,12 @@ def align_goalie_trajectories_to_event_windows(
 	event_working = event_frame.copy()
 
 	goalie_working["frame_elapsed_seconds"] = (
-		(goalie_working["period"].astype(int) - 1) * 1200
+		(goalie_working["period"].map(_period_to_float) - 1) * 1200
 		+ (1200 - goalie_working["game_clock"].map(_clock_to_remaining_seconds))
 	)
 	event_working["game"] = derive_event_game_key(event_working)
 	event_working["event_elapsed_seconds"] = (
-		(event_working["period"].astype(int) - 1) * 1200
+		(event_working["period"].map(_period_to_float) - 1) * 1200
 		+ (1200 - event_working["clock"].map(_clock_to_remaining_seconds))
 	)
 	event_working["event_window_start_seconds"] = event_working["event_elapsed_seconds"] - pre_event_seconds

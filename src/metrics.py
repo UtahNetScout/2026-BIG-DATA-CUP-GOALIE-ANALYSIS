@@ -6,12 +6,32 @@ import numpy as np
 import pandas as pd
 
 
+_PERIOD_LABEL_MAP: dict[str, float] = {
+	"OT": 4.0,
+}
+
+
 def _clock_to_remaining_seconds(clock_value: object) -> float:
 	if pd.isna(clock_value):
 		return np.nan
 
 	minutes, seconds = str(clock_value).split(":", maxsplit=1)
 	return (int(minutes) * 60) + int(seconds)
+
+
+def _period_to_float(period_value: object) -> float:
+	"""Convert a period label to its numeric ordering equivalent.
+
+	Numeric values are cast directly. The label 'OT' is mapped to 4.0,
+	placing overtime frames after regulation period 3 in a monotonic sequence.
+	Other unrecognized labels raise ValueError.
+	"""
+	if pd.isna(period_value):
+		return float("nan")
+	s = str(period_value).strip().upper()
+	if s in _PERIOD_LABEL_MAP:
+		return _PERIOD_LABEL_MAP[s]
+	return float(s)
 
 
 def build_tracking_frame_sequence(frame: pd.DataFrame) -> pd.Series:
@@ -21,9 +41,10 @@ def build_tracking_frame_sequence(frame: pd.DataFrame) -> pd.Series:
 		missing = ", ".join(missing_columns)
 		raise ValueError(f"tracking frame is missing columns required for frame ordering: {missing}")
 
+	period_numeric = frame["period"].map(_period_to_float)
 	remaining_seconds = frame["game_clock"].map(_clock_to_remaining_seconds)
 	image_suffix = frame["image_id"].astype(str).str.extract(r"_(\d+)$", expand=False).astype(float)
-	return ((frame["period"].astype(float) - 1.0) * 1200.0) + (1200.0 - remaining_seconds) + (image_suffix / 1_000_000.0)
+	return ((period_numeric - 1.0) * 1200.0) + (1200.0 - remaining_seconds) + (image_suffix / 1_000_000.0)
 
 
 def compute_motion_efficiency(

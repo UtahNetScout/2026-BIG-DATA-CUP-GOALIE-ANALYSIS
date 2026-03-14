@@ -112,10 +112,12 @@ Current code paths using these fields are primarily in `src/schema_alignment.py`
 ### Observed or Implemented Behavior
 - Frame ordering uses `period`, `game_clock`, and the numeric suffix from `image_id`.
 - The current sequence logic converts `game_clock` to remaining seconds, then computes an increasing frame sequence within and across periods.
+- Non-numeric period labels such as `OT` are mapped to a numeric equivalent (`OT` → 4) before computing the sequence, preserving monotonic ordering across regulation and overtime.
 
 ### Assumptions
 - `game_clock` is formatted as `MM:SS`.
-- `period` is numeric or numerically castable.
+- `period` is numeric or one of the recognized overtime labels (`OT`).
+- `OT` is treated as period 4 for frame ordering purposes, placing overtime frames after regulation period 3 in a monotonic sequence.
 - The `image_id` numeric suffix is a valid sub-second or tie-break ordering input.
 
 ### Unresolved Uncertainties
