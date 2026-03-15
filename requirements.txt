@@ -1,2 +1,8 @@
 pandas
+matplotlib
 numpy
+scikit-learn
+scipy
+shap
+imageio
+xgboost

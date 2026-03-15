@@ -1,0 +1,25 @@
+file,stabilized_groups,stabilized_frame_rows,away_outcome,home_outcome,notes
+2025-10-24.Team.E.@.Team.D.Tracking_P1.csv,2,15421,stabilized_by_jersey_number,stabilized_by_jersey_number,strong coverage
+2025-10-24.Team.E.@.Team.D.Tracking_P2.csv,1,5254,unresolved,stabilized_by_jersey_number,partial
+2025-10-24.Team.E.@.Team.D.Tracking_P3.csv,2,2920,stabilized_by_jersey_number,stabilized_by_jersey_number,lower frame count
+2025-10-24.Team.E.@.Team.D.Tracking_POT.csv,,,"","","needs rerun after OT fix"
+2025-10-28.Team.C.@.Team.A.Tracking_P1.csv,2,17354,stabilized_by_jersey_number,stabilized_by_jersey_number,strong coverage
+2025-10-28.Team.C.@.Team.A.Tracking_P2.csv,2,16532,stabilized_by_jersey_number,stabilized_by_jersey_number,strong coverage
+2025-10-28.Team.C.@.Team.A.Tracking_P3.csv,1,8713,unresolved,stabilized_by_jersey_number,partial
+2025-10-29.Team.G.@.Team.L.Tracking_P1.csv,2,12103,stabilized_by_jersey_number,stabilized_by_jersey_number,strong coverage
+2025-10-29.Team.G.@.Team.L.Tracking_P2.csv,1,6207,stabilized_by_jersey_number,unresolved,partial
+2025-10-29.Team.G.@.Team.L.Tracking_P3.csv,1,10184,stabilized_by_jersey_number,unresolved,partial
+2025-11-02.Team.D.@.Team.A.Tracking_P1.csv,2,13883,stabilized_by_jersey_number,stabilized_by_jersey_number,strong coverage
+2025-11-02.Team.D.@.Team.A.Tracking_P2.csv,1,10346,unresolved,stabilized_by_jersey_number,partial
+2025-11-02.Team.D.@.Team.A.Tracking_P3.csv,2,12667,stabilized_by_jersey_number,stabilized_by_jersey_number,strong coverage
+2025-11-16.Team.H.@.Team.K.Tracking_P1.csv,1,7582,unresolved,stabilized_by_jersey_number,partial
+2025-11-16.Team.H.@.Team.K.Tracking_P2.csv,1,6259,stabilized_by_jersey_number,unresolved,partial
+2025-11-16.Team.H.@.Team.K.Tracking_P3.csv,2,550,stabilized_by_player_id,stabilized_by_jersey_number,tiny sample
+2025-11-16.Team.H.@.Team.K.Tracking_POT.csv,0,0,unresolved,unresolved,no crash after OT fix; only 2 goalie rows total
+2025-11-19.Team.I.@.Team.K.Tracking_P1.csv,1,7281,unresolved,stabilized_by_jersey_number,partial
+2025-11-19.Team.I.@.Team.K.Tracking_P2.csv,2,10719,stabilized_by_jersey_number,stabilized_by_jersey_number,strong coverage
+2025-11-19.Team.I.@.Team.K.Tracking_P3.csv,0,0,unresolved,unresolved,full failure
+2025-11-28.Team.J.@.Team.K.Tracking_P1.csv,2,14731,stabilized_by_jersey_number,stabilized_by_jersey_number,strong coverage
+2025-11-28.Team.J.@.Team.K.Tracking_P2.csv,2,10314,stabilized_by_jersey_number,stabilized_by_jersey_number,strong coverage
+2025-11-28.Team.J.@.Team.K.Tracking_P3.csv,1,861,unresolved,stabilized_by_jersey_number,tiny sample
+2025-11-28.Team.J.@.Team.K.Tracking_POT.csv,1,24,,stabilized_by_player_id,no crash after OT fix; very small sample
